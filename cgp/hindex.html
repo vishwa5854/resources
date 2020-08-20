@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+  <link rel="stylesheet" href="http://127.0.0.1:8887/cgp/css/styles.css">
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8887/cgp/css/hstyles.css">
+    <title></title>
+    <script>
+        let send = async () => {
+            console.log("Sending data to server");
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "text/plain");
+            let a = document.getElementById("name").value;
+            let b = document.getElementById("lol").value;
+            var raw = {"name": a,"password":b};
+        
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                credentials: "include",
+                body: JSON.stringify(raw),
+            };
+
+            await fetch("http://localhost:3000/login", requestOptions)
+                .then(response => response.text())
+                    .then(result => document.write(result)
+                    )
+                        .catch(error => console.log('error', error));
+        }
+    </script>
+</head>
+<body>
+	<div class="container-fluid">
+	<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href=""><h1>PeepBus</h1></a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="signup.html">SignUp</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="">Login</a>
+        </li>
+    </ul>
+	</div>
+</nav>
+<div class="login">
+	<img src="http://127.0.0.1:8887/cgp/css/buslogo.svg" class="logo">
+	<div id="email">
+	<input class="input email" id = "name" type="text" name="email" placeholder="User Name" size="30px">
+	</div>
+	<br>
+	<input class="input" type="text" name="password" id = "lol" placeholder="Password" size="30px">
+	<br>
+<button type="button" class="btn btn-secondary submit" onclick="send()">LOGIN</button>
+
+<h1>&nbsp;</h1>
+</div>
+</div>
+</div>
+</body>
+</html>
